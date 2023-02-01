@@ -18,6 +18,10 @@ class PokeTeamController {
       return response.status(400).json({ error: 'Name is required.' });
     }
 
+    if (!pokemons) {
+      return response.status(400).json({ error: 'Pokemons list is required.' });
+    }
+
     const nameBeUse = await PokeTeamsRepository.findByName(name);
 
     if (nameBeUse) {
@@ -41,6 +45,52 @@ class PokeTeamController {
     const poketeam = await PokeTeamsRepository.create({
       name, pokemons,
     });
+
+    response.json(poketeam);
+  }
+
+  async update(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const {
+      name, pokemons
+    }: PokeTeamType = request.body;
+
+    const poketeamExists = await PokeTeamsRepository.findById(id);
+
+    if (!poketeamExists) {
+      return response.status(404).json({ error: 'Poketeam not found.' });
+    }
+
+    if (!name) {
+      return response.status(400).json({ error: 'Name is required.' });
+    }
+
+    if (!pokemons) {
+      return response.status(400).json({ error: 'Pokemons list is required.' });
+    }
+
+    const nameBeUse = await PokeTeamsRepository.findByName(name);
+
+    if (nameBeUse && nameBeUse.id !== id) {
+      return response.status(400).json({ error: 'This name is already in use.' });
+    }
+
+    if (pokemons.length === 0) {
+      return response.status(400).json({ error: 'In this list there must be at least one pokemon.' });
+    }
+
+    if (pokemons.length > 6) {
+      return response.status(400).json({ error: 'This list cannot exceed six registered pokemons.' });
+    }
+
+    const equalPokemons = (new Set(pokemons)).size !== pokemons.length;
+
+    if (equalPokemons) {
+      return response.status(400).json({ error: 'In this list there are similar pokemons.' });
+    }
+
+    const poketeam = await PokeTeamsRepository.update(id, {name, pokemons});
 
     response.json(poketeam);
   }
