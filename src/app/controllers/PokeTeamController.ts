@@ -38,6 +38,14 @@ class PokeTeamController {
 
     response.json(poketeam);
   }
+
+  async delete(request: Request, response: Response) {
+    const { id } = request.params;
+
+    await PokeTeamsRepository.delete(id);
+
+    response.sendStatus(204);
+  }
 }
 
 export default new PokeTeamController();

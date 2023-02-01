@@ -25,6 +25,16 @@ class PokeTeamsRepository {
     return row;
   }
 
+  async delete(id: string) {
+    const deleteOp = await prisma.pokeTeam.delete({
+      where: {
+        id: id
+      }
+    });
+
+    return deleteOp;
+  }
+
 }
 
 export default new PokeTeamsRepository();
