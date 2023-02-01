@@ -9,3 +9,11 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model PokeTeam {
+  id      String   @id @default(uuid())
+  name    String   @unique
+  pokemon String[]
+
+  @@map("poketeams")
+}
