@@ -3,6 +3,12 @@ import PokeTeamsRepository from '../repositories/PokeTeamsRepository';
 import { PokeTeamType } from '../types/PokeTeamType';
 
 class PokeTeamController {
+  async index(request: Request, response: Response) {
+    const poketeams = await PokeTeamsRepository.findAll();
+
+    response.json(poketeams);
+  }
+
   async store(request: Request, response: Response) {
     const {
       name, pokemons

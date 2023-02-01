@@ -4,6 +4,18 @@ import { PokeTeamType } from '../types/PokeTeamType';
 const prisma = new PrismaClient();
 
 class PokeTeamsRepository {
+  async findAll() {
+    const rows = await prisma.pokeTeam.findMany({
+      orderBy: [
+        {
+          name: 'asc'
+        }
+      ]
+    });
+
+    return rows;
+  }
+
   async findByName(name: string) {
     const row = await prisma.pokeTeam.findUnique({
       where: {
