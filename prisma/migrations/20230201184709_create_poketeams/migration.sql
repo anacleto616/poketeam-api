@@ -2,7 +2,7 @@
 CREATE TABLE "poketeams" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "pokemon" TEXT[],
+    "pokemons" TEXT[],
 
     CONSTRAINT "poketeams_pkey" PRIMARY KEY ("id")
 );

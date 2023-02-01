@@ -11,9 +11,9 @@ datasource db {
 }
 
 model PokeTeam {
-  id      String   @id @default(uuid())
-  name    String   @unique
-  pokemon String[]
+  id       String   @id @default(uuid())
+  name     String   @unique
+  pokemons String[]
 
   @@map("poketeams")
 }
