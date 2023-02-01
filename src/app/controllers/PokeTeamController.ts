@@ -26,7 +26,7 @@ class PokeTeamController {
       return response.status(400).json({ error: 'This list cannot exceed six registered pokemons.' });
     }
 
-    const equalPokemons = pokemons.some((pokemon: string) => pokemon === pokemon);
+    const equalPokemons = (new Set(pokemons)).size !== pokemons.length;
 
     if (equalPokemons) {
       return response.status(400).json({ error: 'In this list there are similar pokemons.' });
