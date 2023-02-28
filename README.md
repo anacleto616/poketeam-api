@@ -23,4 +23,8 @@
 - Entre na pasta poketeam-api com: cd poketeam-api
 - Digite o comando: npm install, para instalar as dependências do projeto
 - Digite o comando do docker compose para iniciar o banco de dados: docker compose up -d
+- Crie um arquivo `.env` na raiz do projeto inserindo o seguinte conteúdo:
+  - DATABASE_URL="postgresql://ilumeo:ilumeopass@localhost:5432/ilumeo-db?schema=public"
+- Digite o comando: `npx prisma db push`, para fazer o push do banco de dados
+- Digite o comando: `npx prisma db pull`, para fazer o pull do banco de dados
 - Execute a aplicação com o comando: npm run dev, estará rodando no endereço: http://localhost:3333
